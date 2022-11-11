@@ -1,15 +1,14 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Navbar from './components/Navbar';
-import SearchBar from './components/SearchBar';
+import { Routes, Route } from 'react-router-dom'
+import DetailsPage from './Pages/DetailsPage';
+import Home from './Pages/Home';
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <SearchBar />
-    </div>
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/details/:username' element={<DetailsPage />} />
+    </Routes>
   );
 }
-
 export default App;

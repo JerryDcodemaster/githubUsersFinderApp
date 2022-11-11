@@ -8,12 +8,11 @@ const SearchBar = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`https://api.github.com/users?q=${text}`)
+    fetch(`https://api.github.com/search/users?q=${text}`)
     .then(res => res.json())
-    .then(data => setUsers(data))
+    .then(data => setUsers(data.items))
     .catch(err => console.error(err))
-  }
-    
+  } 
 
   return (
     <div className="container-fluid">
@@ -29,19 +28,21 @@ const SearchBar = () => {
         />
         <br />
         <div className="d-grid">
-          <button className="btn btn-dark set">Search</button>
+          <button className="btn btn-block btn-dark set">Search</button>
         </div>
-    </form>
-        {users.map(({ avatar_url, login, id, followers_url, url }) => 
-          <Card 
-            key={id} 
-            img={avatar_url} 
-            name={login} 
-            id={id}
-            followers={followers_url}
-            link={url}
-          />
-        )}
+      </form>
+      <div className="container">
+        <div className="row g-3">
+          {users.map(({ avatar_url, login, id }) => 
+            <Card 
+              key={id} 
+              img={avatar_url} 
+              name={login} 
+              id={id}
+            />
+          )}
+        </div>
+      </div>
     </div>
   )
 }
